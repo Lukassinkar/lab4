@@ -1,0 +1,202 @@
+package Defending.Heating;
+
+public interface Heating {
+    int getCubes();
+    void setCubes(int cubes);
+}
+package Defending.Heating;
+
+import Defending.Payer.Payer;
+import Defending.Payer.PayerImpl;
+
+public class HeatingImpl extends PayerImpl implements Heating {
+    private int cubes;
+
+    public HeatingImpl(int id, String name, String surname, String address, int sum, int cubes) {
+        super(id, name, surname, address, sum);
+        this.cubes = cubes;
+    }
+
+    public int getCubes() {
+        return cubes;
+    }
+
+    public void setCubes(int cubes) {
+        this.cubes = cubes;
+    }
+
+    public String toString() {
+        return getId() + " " + getName() + " " + getSurname() + " " + getAddress() + " " + getSum() + " " + cubes;
+    }
+}
+package Defending.Internet;
+
+public interface Internet {
+    String getIp();
+    void setIp(String ip);
+}
+package Defending.Internet;
+
+import Defending.Payer.PayerImpl;
+
+public class InternetImpl extends PayerImpl implements Internet {
+    private String ip;
+
+    public InternetImpl(int id, String name, String surname, String address, int sum, String ip) {
+        super(id, name, surname, address, sum);
+        this.ip = ip;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String toString() {
+        return getId() + " " + getName() + " " + getSurname() + " " + getAddress() + " " + getSum() + " " + ip;
+    }
+}
+package Defending.Payer;
+
+public interface Payer {
+    int getId();
+    void setId(int id);
+    String getName();
+    void setName(String name);
+    String getSurname();
+    void setSurname(String surname);
+    String getAddress();
+    void setAddress(String address);
+    double getSum();
+    void setSum(double sum);
+}
+package Defending.Payer;
+
+public class PayerImpl implements Payer {
+    private int id;
+    private String name;
+    private String surname;
+    private String address;
+    private double sum;
+
+    public PayerImpl(int id, String name, String surname, String address, int sum) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.sum = sum;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public double getSum() {
+        return sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
+
+    public String toString() {
+        return id + " " + name + " " + surname + " " + address + " " + sum;
+    }
+}
+package Defending.Phone;
+
+public interface Phone {
+    int getNum();
+    void setNum(int num);
+}
+package Defending.Phone;
+
+import Defending.Payer.PayerImpl;
+
+public class PhoneImpl extends PayerImpl implements Phone {
+    private int num;
+
+    public PhoneImpl(int id, String name, String surname, String address, int sum, int num) {
+        super(id, name, surname, address, sum);
+        this.num = num;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public String toString() {
+        return getId() + " " + getName() + " " + getSurname() + " " + getAddress() + " " + getSum() + " " + num;
+    }
+}
+package Defending;
+
+import Defending.Heating.HeatingImpl;
+import Defending.Internet.InternetImpl;
+import Defending.Payer.PayerImpl;
+import Defending.Phone.PhoneImpl;
+
+public class Main {
+    public static void main(String[] args) {
+        double total = 0;
+        PayerImpl[] payers = new PayerImpl[12];
+        payers[0] = new PayerImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 4685);
+        payers[1] = new PayerImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 4556);
+        payers[2] = new PayerImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 48974);
+        payers[3] = new PhoneImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 7899, 861234567);
+        payers[4] = new PhoneImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 8979, 861234567);
+        payers[5] = new PhoneImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 8798, 861234567);
+        payers[6] = new InternetImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 789, "0.0.0.0");
+        payers[7] = new InternetImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 1234, "0.0.0.0");
+        payers[8] = new InternetImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 56746, "0.0.0.0");
+        payers[9] = new HeatingImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 74879, 15);
+        payers[10] = new HeatingImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 7896, 15);
+        payers[11] = new HeatingImpl(1, "Lukas", "Sinkar", "Vilniaus g. 35 - 15", 46587, 15);
+
+        System.out.println("Mokesciai: ");
+
+        for (PayerImpl payer : payers) {
+            if (payer instanceof InternetImpl || payer instanceof PhoneImpl) {
+                total += payer.getSum();
+                System.out.println(payer.getSum());
+            }
+        }
+
+        System.out.println("Viso: " + total);
+    }
+}
